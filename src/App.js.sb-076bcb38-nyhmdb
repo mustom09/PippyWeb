@@ -1,0 +1,227 @@
+import { useState } from "react";
+
+const C = { blush:"#f5e6e0",petal:"#f0d5cc",rose:"#e8bfb3",mutedRose:"#c9a090",warmTaupe:"#9e7b6e",deepTaupe:"#7a5c52",cream:"#faf6f3",white:"#ffffff" };
+const s = { navLogoBtn:{display:"flex",alignItems:"center",gap:"0.6rem",background:"none",border:"none",cursor:"pointer",padding:0},navLogoText:{fontFamily:"'Cormorant Garamond', serif",fontSize:"1.5rem",fontWeight:400,color:C.warmTaupe,letterSpacing:"0.02em"},navLink:{background:"none",border:"none",cursor:"pointer",fontSize:"0.83rem",letterSpacing:"0.06em",textTransform:"uppercase",color:C.warmTaupe,fontFamily:"'DM Sans', sans-serif",padding:"0.4rem 0"},navCta:{background:C.warmTaupe,color:C.cream,padding:"0.5rem 1.3rem",borderRadius:100},eyebrow:{fontSize:"0.75rem",letterSpacing:"0.18em",textTransform:"uppercase",color:C.mutedRose,marginBottom:"1rem",fontWeight:500},heroTitle:{fontFamily:"'Cormorant Garamond', serif",fontSize:"clamp(3rem,7vw,5rem)",fontWeight:300,lineHeight:1.1,color:C.deepTaupe,marginBottom:"1.4rem"},heroSub:{fontSize:"1.05rem",lineHeight:1.7,color:C.warmTaupe,maxWidth:460,marginBottom:"2.5rem",fontWeight:300},btnPrimary:{background:C.warmTaupe,color:C.cream,border:"none",padding:"0.85rem 2.2rem",borderRadius:100,fontFamily:"'DM Sans', sans-serif",fontSize:"0.9rem",cursor:"pointer",letterSpacing:"0.04em"},btnGhost:{background:"transparent",color:C.warmTaupe,border:"1.5px solid #e8bfb3",padding:"0.85rem 2.2rem",borderRadius:100,fontFamily:"'DM Sans', sans-serif",fontSize:"0.9rem",cursor:"pointer",letterSpacing:"0.04em"},sectionLabel:{fontSize:"0.73rem",letterSpacing:"0.16em",textTransform:"uppercase",color:C.mutedRose,marginBottom:"0.8rem",fontWeight:500},sectionTitle:{fontFamily:"'Cormorant Garamond', serif",fontSize:"clamp(2rem,4vw,2.8rem)",fontWeight:300,color:C.deepTaupe,marginBottom:"3rem",lineHeight:1.2},featureCard:{background:C.cream,borderRadius:20,padding:"2.2rem 1.8rem",border:"1px solid rgba(200,160,144,0.15)"},featureIcon:{width:46,height:46,background:"linear-gradient(135deg,#f0d5cc,#f5e6e0)",borderRadius:13,marginBottom:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.3rem"},formLabel:{display:"block",fontSize:"0.75rem",letterSpacing:"0.08em",textTransform:"uppercase",color:C.warmTaupe,fontWeight:500,marginBottom:"0.4rem"},formInput:{width:"100%",background:"rgba(250,246,243,0.8)",border:"1.5px solid rgba(200,160,144,0.25)",borderRadius:12,padding:"0.82rem 1rem",fontFamily:"'DM Sans', sans-serif",fontSize:"0.88rem",color:C.deepTaupe,outline:"none",boxSizing:"border-box"} };
+
+const Nav = ({ setPage }) => (
+  <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 4rem",background:"rgba(250,246,243,0.88)",backdropFilter:"blur(16px)",borderBottom:"1px solid rgba(200,160,144,0.15)"}}>
+    <button onClick={() => setPage("home")} style={s.navLogoBtn}>
+      <span style={s.navLogoText}>pippy</span>
+    </button>
+    <ul style={{display:"flex",gap:"2.2rem",listStyle:"none",margin:0,padding:0}}>
+      {["home","about","waitlist","contact"].map(p => (
+        <li key={p}><button onClick={() => setPage(p)} style={{...s.navLink,...(p==="waitlist"?s.navCta:{})}}>{p==="waitlist"?"Join Waitlist":p.charAt(0).toUpperCase()+p.slice(1)}</button></li>
+      ))}
+    </ul>
+  </nav>
+);
+
+const Footer = ({ setPage }) => (
+  <footer style={{background:C.deepTaupe,padding:"3rem 4rem 2rem",marginTop:"4rem"}}>
+    <div style={{maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"1.5rem"}}>
+      <span style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"1.4rem",fontWeight:300,color:"rgba(250,246,243,0.9)"}}>pippy</span>
+      <ul style={{display:"flex",gap:"2rem",listStyle:"none",margin:0,padding:0}}>
+        {["home","about","waitlist","contact"].map(p => (
+          <li key={p}><button onClick={() => setPage(p)} style={{background:"none",border:"none",cursor:"pointer",fontSize:"0.78rem",letterSpacing:"0.08em",textTransform:"uppercase",color:"rgba(250,246,243,0.5)",fontFamily:"'DM Sans', sans-serif"}}>{p}</button></li>
+        ))}
+      </ul>
+    </div>
+    <div style={{borderTop:"1px solid rgba(250,246,243,0.1)",paddingTop:"1.5rem",marginTop:"1.5rem",textAlign:"center",fontSize:"0.76rem",color:"rgba(250,246,243,0.3)"}}>© 2025 Pippy Inc. All rights reserved.</div>
+  </footer>
+);
+
+const Home = ({ setPage }) => (
+  <div style={{paddingTop:72}}>
+    <div style={{minHeight:"88vh",background:"linear-gradient(160deg,#faf6f3 0%,#f5e6e0 60%,#f0d5cc 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"5rem 2rem",position:"relative",overflow:"hidden"}}>
+      <div style={{position:"relative",zIndex:2,maxWidth:700}}>
+        <p style={s.eyebrow}>Wellness · Community · Connection</p>
+        <h1 style={s.heroTitle}>Find your flow,<br/><em style={{fontStyle:"italic",color:C.warmTaupe}}>together.</em></h1>
+        <p style={s.heroSub}>Pippy is the app that brings wellness communities to life — connecting people through shared practice, intention, and growth.</p>
+        <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap"}}>
+          <button style={s.btnPrimary} onClick={() => setPage("waitlist")}>Join the Waitlist</button>
+          <button style={s.btnGhost} onClick={() => setPage("about")}>Learn More</button>
+        </div>
+      </div>
+    </div>
+    <div style={{background:C.blush,padding:"2.5rem 4rem",display:"flex",justifyContent:"center",gap:"5rem",flexWrap:"wrap"}}>
+      {[["10k+","Waitlist Members"],["50+","Partner Studios"],["2025","Launch Year"]].map(([num,label]) => (
+        <div key={label} style={{textAlign:"center"}}>
+          <span style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"2.8rem",fontWeight:300,color:C.deepTaupe,display:"block"}}>{num}</span>
+          <span style={{fontSize:"0.75rem",letterSpacing:"0.12em",textTransform:"uppercase",color:C.mutedRose,fontWeight:500}}>{label}</span>
+        </div>
+      ))}
+    </div>
+    <div style={{background:C.white,padding:"6rem 4rem"}}>
+      <div style={{maxWidth:1100,margin:"0 auto"}}>
+        <p style={s.sectionLabel}>Why Pippy</p>
+        <h2 style={s.sectionTitle}>Everything you need to<br/>practice with purpose</h2>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:"1.8rem"}}>
+          {[{icon:"🧘",title:"Guided Sessions",desc:"Access curated yoga, meditation, and movement sessions designed by world-class instructors — on your schedule."},{icon:"🌿",title:"Wellness Circles",desc:"Join intimate communities of like-minded practitioners. Share progress, set intentions, and grow together."},{icon:"✨",title:"Personalized Path",desc:"Pippy learns your rhythm and curates a practice that evolves with you — from beginner to deeply experienced."},{icon:"📱",title:"Beautifully Simple",desc:"Designed with calm in mind. No clutter, no distractions — just the practice, beautifully presented."}].map(({icon,title,desc}) => (
+            <div key={title} style={s.featureCard}>
+              <div style={s.featureIcon}>{icon}</div>
+              <h3 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"1.3rem",fontWeight:500,color:C.deepTaupe,marginBottom:"0.6rem"}}>{title}</h3>
+              <p style={{fontSize:"0.88rem",lineHeight:1.65,color:C.warmTaupe,fontWeight:300}}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <Footer setPage={setPage}/>
+  </div>
+);
+
+const About = ({ setPage }) => (
+  <div style={{paddingTop:72}}>
+    <div style={{background:"linear-gradient(135deg,#f5e6e0 0%,#faf6f3 100%)",padding:"6rem 4rem 4rem",textAlign:"center"}}>
+      <p style={s.eyebrow}>Our Story</p>
+      <h1 style={{...s.heroTitle,fontSize:"clamp(2.6rem,5vw,4rem)"}}>Born from a love of<br/><em style={{fontStyle:"italic",color:C.warmTaupe}}>shared practice</em></h1>
+      <p style={{...s.heroSub,margin:"0 auto"}}>Pippy began with a simple belief: wellness is better together.</p>
+    </div>
+    <div style={{maxWidth:1100,margin:"0 auto",padding:"5rem 4rem"}}>
+      {[{emoji:"🌸",title:"We started with a question",body:["Why is it so hard to find your people in wellness? Studios are transient, apps are solitary, and social media is noisy.","Pippy was built to bridge that gap — creating a space where your practice deepens through connection."],flip:false},{emoji:"🤝",title:"Our mission",body:["To make holistic wellness accessible, communal, and joyful. We believe movement and mindfulness are most powerful when shared.","We partner with studios, instructors, and wellness communities around the world to bring the best practices directly to you."],flip:true}].map(({emoji,title,body,flip}) => (
+        <div key={title} style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"4rem",alignItems:"center",marginBottom:"5rem",direction:flip?"rtl":"ltr"}}>
+          <div style={{direction:"ltr",background:"linear-gradient(145deg,#f0d5cc,#f5e6e0)",borderRadius:24,aspectRatio:"4/3",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"5rem"}}>{emoji}</div>
+          <div style={{direction:"ltr"}}>
+            <h2 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"2rem",fontWeight:300,color:C.deepTaupe,marginBottom:"1rem",lineHeight:1.2}}>{title}</h2>
+            {body.map((p,i) => <p key={i} style={{fontSize:"0.93rem",lineHeight:1.75,color:C.warmTaupe,fontWeight:300,marginBottom:"0.8rem"}}>{p}</p>)}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style={{background:C.white,padding:"5rem 4rem",textAlign:"center"}}>
+      <p style={s.sectionLabel}>Our Team</p>
+      <h2 style={{...s.sectionTitle,margin:"0 auto 3rem",textAlign:"center"}}>The people behind Pippy</h2>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:"2.5rem",maxWidth:860,margin:"0 auto"}}>
+        {[["🌺","Maria Musto","Co-Founder & CTO"],["🌿","Gabriella Doherty","Co-Founder & CEO"]].map(([avatar,name,role]) => (
+          <div key={name}>
+            <div style={{width:90,height:90,background:"linear-gradient(135deg,#f0d5cc,#e8bfb3)",borderRadius:"50%",margin:"0 auto 1rem",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.9rem"}}>{avatar}</div>
+            <h4 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"1.1rem",fontWeight:500,color:C.deepTaupe,marginBottom:"0.25rem"}}>{name}</h4>
+            <span style={{fontSize:"0.75rem",letterSpacing:"0.06em",textTransform:"uppercase",color:C.mutedRose}}>{role}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Footer setPage={setPage}/>
+  </div>
+);
+
+const Waitlist = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({name:"",email:"",interest:""});
+  const handleSubmit = () => { if(!form.name||!form.email){alert("Please fill in your name and email.");return;} setSubmitted(true); };
+  return (
+    <div style={{paddingTop:72,minHeight:"calc(100vh - 72px)",background:"linear-gradient(160deg,#faf6f3 0%,#f5e6e0 50%,#f0d5cc 100%)",display:"flex",alignItems:"center",justifyContent:"center",padding:"5rem 2rem"}}>
+      <div style={{background:"rgba(255,255,255,0.72)",backdropFilter:"blur(20px)",border:"1px solid rgba(200,160,144,0.2)",borderRadius:32,padding:"4rem",maxWidth:480,width:"100%",textAlign:"center",boxShadow:"0 30px 80px rgba(158,122,110,0.1)"}}>
+        {submitted ? (
+          <div>
+            <div style={{fontSize:"3rem",marginBottom:"1rem"}}>🌸</div>
+            <h2 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"2rem",fontWeight:300,color:C.deepTaupe,marginBottom:"0.8rem"}}>You're on the list!</h2>
+            <p style={{fontSize:"0.93rem",color:C.warmTaupe,lineHeight:1.7,fontWeight:300}}>We'll be in touch soon with early access details and exclusive perks for our founding members.</p>
+          </div>
+        ) : (
+          <>
+            <h1 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"2.5rem",fontWeight:300,color:C.deepTaupe,marginBottom:"1rem",lineHeight:1.2}}>Be first to <em style={{fontStyle:"italic"}}>flow</em> with Pippy</h1>
+            <p style={{fontSize:"0.93rem",lineHeight:1.7,color:C.warmTaupe,fontWeight:300,marginBottom:"2rem"}}>Join the waitlist for early access, founding member perks, and exclusive studio partnerships.</p>
+            <div style={{display:"flex",flexDirection:"column",gap:"1rem",textAlign:"left"}}>
+              {[{label:"First Name",key:"name",type:"text",placeholder:"Your first name"},{label:"Email Address",key:"email",type:"email",placeholder:"you@example.com"}].map(({label,key,type,placeholder}) => (
+                <div key={key}><label style={s.formLabel}>{label}</label><input type={type} placeholder={placeholder} value={form[key]} onChange={e => setForm({...form,[key]:e.target.value})} style={s.formInput}/></div>
+              ))}
+              <div>
+                <label style={s.formLabel}>I'm interested in</label>
+                <select value={form.interest} onChange={e => setForm({...form,interest:e.target.value})} style={s.formInput}>
+                  <option value="">Select an option...</option>
+                  <option>Yoga & Movement</option>
+                  <option>Meditation & Breathwork</option>
+                  <option>Community & Circles</option>
+                  <option>All of the above 🌸</option>
+                </select>
+              </div>
+              <button style={{...s.btnPrimary,width:"100%",padding:"1rem",borderRadius:12,fontSize:"0.95rem",marginTop:"0.4rem"}} onClick={handleSubmit}>Reserve My Spot →</button>
+            </div>
+            <p style={{fontSize:"0.76rem",color:C.mutedRose,marginTop:"1rem"}}>No spam, ever. Unsubscribe anytime. 🌿</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Contact = ({ setPage }) => {
+  const [submitted, setSubmitted] = useState(false);
+  return (
+    <div style={{paddingTop:72}}>
+      <div style={{maxWidth:1100,margin:"0 auto",padding:"5rem 4rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1.4fr",gap:"5rem",alignItems:"start"}}>
+          <div>
+            <p style={s.eyebrow}>Get in Touch</p>
+            <h1 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"3rem",fontWeight:300,color:C.deepTaupe,lineHeight:1.15,marginBottom:"1rem"}}>We'd love to<br/><em style={{fontStyle:"italic",color:C.warmTaupe}}>hear from you</em></h1>
+            <p style={{fontSize:"0.93rem",lineHeight:1.75,color:C.warmTaupe,fontWeight:300,marginBottom:"2rem"}}>Whether you're a studio partner, investor, press, or just curious — our inbox is always open.</p>
+            {[{icon:"✉️",label:"Email",value:"hello@pippy.app"},{icon:"🤝",label:"Partnerships",value:"partners@pippy.app"},{icon:"📍",label:"Location",value:"San Francisco, California"},{icon:"📱",label:"Social",value:"@pippyapp"}].map(({icon,label,value}) => (
+              <div key={label} style={{display:"flex",alignItems:"center",gap:"1rem",marginBottom:"1.2rem"}}>
+                <div style={{width:42,height:42,background:C.blush,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.1rem",flexShrink:0}}>{icon}</div>
+                <div>
+                  <span style={{display:"block",fontSize:"0.73rem",letterSpacing:"0.1em",textTransform:"uppercase",color:C.mutedRose,fontWeight:500}}>{label}</span>
+                  <span style={{fontSize:"0.88rem",color:C.deepTaupe}}>{value}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{background:C.white,borderRadius:24,padding:"3rem",border:"1px solid rgba(200,160,144,0.15)",boxShadow:"0 20px 60px rgba(158,122,110,0.1)"}}>
+            <h3 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"1.6rem",fontWeight:400,color:C.deepTaupe,marginBottom:"2rem"}}>Send us a message</h3>
+            {submitted ? (
+              <div style={{textAlign:"center",padding:"2rem"}}>
+                <div style={{fontSize:"3rem",marginBottom:"1rem"}}>💌</div>
+                <h2 style={{fontFamily:"'Cormorant Garamond', serif",fontSize:"1.8rem",fontWeight:300,color:C.deepTaupe,marginBottom:"0.8rem"}}>Message sent!</h2>
+                <p style={{fontSize:"0.93rem",color:C.warmTaupe,fontWeight:300}}>Thanks for reaching out. We'll get back to you within 1–2 business days.</p>
+              </div>
+            ) : (
+              <div style={{display:"flex",flexDirection:"column",gap:"1.1rem"}}>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"1rem"}}>
+                  <div><label style={s.formLabel}>First Name</label><input type="text" placeholder="Jane" style={s.formInput}/></div>
+                  <div><label style={s.formLabel}>Last Name</label><input type="text" placeholder="Doe" style={s.formInput}/></div>
+                </div>
+                <div><label style={s.formLabel}>Email</label><input type="email" placeholder="jane@example.com" style={s.formInput}/></div>
+                <div>
+                  <label style={s.formLabel}>Subject</label>
+                  <select style={s.formInput}>
+                    <option>General Inquiry</option>
+                    <option>Studio Partnership</option>
+                    <option>Press & Media</option>
+                    <option>Investor Relations</option>
+                    <option>Feedback</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={s.formLabel}>Message</label>
+                  <textarea placeholder="Tell us what's on your mind..." style={{...s.formInput,minHeight:120,resize:"vertical"}}/>
+                </div>
+                <button style={{...s.btnPrimary,width:"100%",padding:"1rem",borderRadius:12,fontSize:"0.95rem"}} onClick={() => setSubmitted(true)}>Send Message →</button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <Footer setPage={setPage}/>
+    </div>
+  );
+};
+
+export default function PippyWebsite() {
+  const [page, setPage] = useState("home");
+  const go = (p) => { setPage(p); window.scrollTo({top:0,behavior:"smooth"}); };
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'DM Sans',sans-serif; background:#faf6f3; overflow-x:hidden; }
+        input, select, textarea { font-family:'DM Sans',sans-serif; }
+      `}</style>
+      <Nav setPage={go}/>
+      {page==="home"     && <Home     setPage={go}/>}
+      {page==="about"    && <About    setPage={go}/>}
+      {page==="waitlist" && <Waitlist/>}
+      {page==="contact"  && <Contact  setPage={go}/>}
+    </>
+  );
+}
